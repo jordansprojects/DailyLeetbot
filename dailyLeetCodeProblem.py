@@ -15,17 +15,13 @@ def get_daily_challenge():
 
         # check if request was successful
         if response.status_code == 200:
-            print("dailyLeetCodeProblem.py : request successful! <3 rawr XD")
-
             # parse html 
             soup = bs4.BeautifulSoup(response.text, 'html.parser')
 
             challenge_elem = soup.find('a', href=lambda href: href and query_str in href)
 
-            print(challenge_elem['href'])
             desired_url = base_url + challenge_elem['href']
             
-            print("desired url = " + desired_url)
             return desired_url
         else:
             raise Exception ("dailyLeetCodeProblem.py : request failed ")
@@ -35,13 +31,12 @@ def get_daily_challenge():
 
 
 def get_advent_of_code():
-    month = datetime.now().month
+    month = datetime.now().month # change these values to a valid number to debug
     year = datetime.now().year
     day = datetime.now().day
     url = 'https://adventofcode.com/' + str(year) + '/day/'+ str(day)
     if month == 12:
-        print(url)
         return url
     else:
-        print("It is not December.")
+        raise Exception("dailyLeetCodeProblem.py : It is not December so this function should not be called.")
         

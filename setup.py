@@ -11,7 +11,7 @@ token = input("Enter token:")
 intents = discord.Intents.default()
 intents.message_content = True
 
-client = lb.DailyLeetClient(intents=intents)
+client = lb.DailyLeetClient(intents=intents, command_prefix = '!')
 
 try:
     client.run(token)
