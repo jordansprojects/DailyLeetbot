@@ -32,7 +32,7 @@ class DailyLeetClient(commands.Bot):
         else:
             raise Exception("leetbot.py : target channel not set.")
 
-    @tasks.loop(seconds=24)
+    @tasks.loop(hours=24)
     async def post_daily_question(self):
         month = datetime.now().month
         if self.target_channel:
