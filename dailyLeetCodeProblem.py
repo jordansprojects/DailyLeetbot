@@ -2,11 +2,13 @@
 import requests
 import bs4
 from datetime import datetime
+import pytz # timezone conversions
 
 def get_daily_challenge():
     try:
         # our link will contain this data
-        query_str =  'daily-question&envId=' + datetime.now().strftime('%Y-%m-%d')
+        query_str =  'daily-question&envId=' + datetime.now(pytz.utc).strftime('%Y-%m-%d') # leetcode uses UTC
+
         url_to_scrape = 'https://leetcode.com/problemset/all/' 
         response = requests.get(url_to_scrape)
       
@@ -18,10 +20,13 @@ def get_daily_challenge():
             # parse html 
             soup = bs4.BeautifulSoup(response.text, 'html.parser')
 
+            # find element containing the daily question marker along with todays date in UTC time
             challenge_elem = soup.find('a', href=lambda href: href and query_str in href)
-
-            desired_url = base_url + challenge_elem['href']
             
+            if( not challenge_elem):
+                raise Exception("dailyLeetCodeProblem.py: element not found.")
+            
+            desired_url = base_url + challenge_elem['href']
             return desired_url
         else:
             raise Exception ("dailyLeetCodeProblem.py : request failed ")
@@ -31,9 +36,10 @@ def get_daily_challenge():
 
 
 def get_advent_of_code():
-    month = datetime.now().month # change these values to a valid number to debug
-    year = datetime.now().year
-    day = datetime.now().day
+    EST = pytz.timezone('US/Eastern') # advent of code uses EST
+    month = datetime.now(EST).month # change these values to a valid number if you want to debug
+    year = datetime.now(EST).year
+    day = datetime.now(EST).day
     url = 'https://adventofcode.com/' + str(year) + '/day/'+ str(day)
     if month == 12:
         return url
