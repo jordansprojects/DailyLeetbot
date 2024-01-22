@@ -1,4 +1,4 @@
-import dailyLeetCodeProblem as dlcp
+import dlcp as dlcp
 from datetime import datetime # kinda weird but the way it is 
 import pytz # for timezone  conversion
 
