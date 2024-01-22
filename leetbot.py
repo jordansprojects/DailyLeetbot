@@ -3,7 +3,7 @@ from datetime import datetime
 from discord.ext import commands, tasks
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
-import dailyLeetCodeProblem as dlcp
+import dlcp as dlcp
 import pytz # for timezone conversions
 
 EST = pytz.timezone("US/Eastern")
