@@ -13,7 +13,7 @@ def get_daily_challenge():
     logger.write(sys.argv[0] + " Using query string " + query_str + '\n')
     url_to_scrape = 'https://leetcode.com/problemset/all/' 
     response = requests.get(url_to_scrape)
-      
+        
     # url we will append to once we find the daily question element
     base_url = 'https://leetcode.com'
     logger.close()
@@ -27,5 +27,5 @@ def get_advent_of_code():
     if month == 12:
         return url
     else:
-        raise Exception("dailyLeetCodeProblem.py : It is not December so this function should not be called.")
-        
+        raise Exception(sys.argv[0] + " It is not December so this function should not be called.")
+            
