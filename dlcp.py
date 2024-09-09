@@ -15,9 +15,9 @@ from selenium.webdriver.chrome.options import Options
 # This is a Wonderful resource on selenium for web scraping purposes :
 #    https://www.browserstack.com/guide/web-scraping-using-selenium-python
 def get_daily_challenge():
-    WAIT_TIME = 5
+    WAIT_TIME = 6000
     chrome_options = Options()
-    chrome_options.add_argument("--headless=new")
+    # chrome_options.add_argument("--headless=new")
     chrome_options.add_argument("--disable-extensions")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
@@ -53,7 +53,8 @@ def get_daily_challenge():
         raise Exception(sys.argv[0] + "URL does not match.\nExpected : " + url_to_scrape + "\nActual: " + get_url )
 
     page_source = driver.page_source
-    driver.quit()
+    # logger.write(str(page_source))
+    # driver.quit()
     soup = bs4.BeautifulSoup(page_source, features="html.parser")
     for a in soup.body.find_all('a', href=True):
         #logger.write("url contained " + match['href'] + '\n')

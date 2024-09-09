@@ -8,7 +8,7 @@ import pytz # for timezone  conversion
 EST = pytz.timezone('US/Eastern') # Advent of Code timezone
 UTC = pytz.utc                   # Leetcode Daily challenge timezone
 
-leet =dlcp.get_daily_challenge()
+leet = dlcp.get_daily_challenge()
 if ( not leet):
     print("Test 1 FAIL. The daily challenge should not be null.")
 else:

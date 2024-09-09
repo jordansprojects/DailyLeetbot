@@ -15,8 +15,6 @@ XMAS_EMOJIS2 = " :snowman2: :santa: :christmas_tree: "
 WELCOME = "Hello. I will post the Leetcode question everytime the new questions drops at 4:00PM PST (12:00AM UTC)"
 
 class DailyLeetClient(commands.Bot):
-    
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.logger= open ('logs/leetbot.log', 'w')
