@@ -9,6 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
 # Scrapes leetcode problemset page for the daily question so the link can be retrieved and posted by the bot
@@ -17,7 +18,8 @@ from selenium.webdriver.chrome.options import Options
 def get_daily_challenge():
     WAIT_TIME = 6000
     chrome_options = Options()
-    # chrome_options.add_argument("--headless=new")
+    #TODO condense this, oh my god
+    # chrome_options.add_argument("--headless new")
     chrome_options.add_argument("--disable-extensions")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
@@ -52,9 +54,8 @@ def get_daily_challenge():
     if(get_url != url_to_scrape):
         raise Exception(sys.argv[0] + "URL does not match.\nExpected : " + url_to_scrape + "\nActual: " + get_url )
 
+
     page_source = driver.page_source
-    # logger.write(str(page_source))
-    # driver.quit()
     soup = bs4.BeautifulSoup(page_source, features="html.parser")
     for a in soup.body.find_all('a', href=True):
         #logger.write("url contained " + match['href'] + '\n')
@@ -62,11 +63,6 @@ def get_daily_challenge():
             url = base_url + a['href']
             logger.write("match found : " + a['href'])
             return url
-
-
-
-   
-    
     logger.close()
 
 def get_advent_of_code():
