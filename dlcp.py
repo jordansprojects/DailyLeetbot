@@ -29,13 +29,17 @@ def get_daily_challenge():
     wait = WebDriverWait(driver, timeout=60, poll_frequency=.2)
 
     #TO-DO : selenium route is inconsistent-  do more research into making sure headers look appropriate and using the requests library instead
-    r = requests.get(BASE_URL)
-    print(r.status_code)
+    #r = requests.get(BASE_URL)
+    #print(r.status_code)
 
     try:
-        driver.get(BASE_URL)
-        content = driver.page_source
+        driver.get(SCRAPE_URL)
         soup = bs4.BeautifulSoup(content, features="html.parser")
+        title = (
+            WebDriverWait(driver=browser, timeout=10)
+            .until(visibility_of_element_located((By.CSS_SELECTOR, "a")))
+        )
+        content = driver.page_source
 
         # Search for the daily question URL
         for a in soup.body.find_all('a', href=True):
