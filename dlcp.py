@@ -28,8 +28,12 @@ def get_daily_challenge():
     driver = webdriver.Chrome(options=chrome_options)
     wait = WebDriverWait(driver, timeout=60, poll_frequency=.2)
 
+    #TO-DO : selenium route is inconsistent-  do more research into making sure headers look appropriate and using the requests library instead
+    r = requests.get(BASE_URL)
+    print(r.status_code)
+
     try:
-        driver.get(SCRAPE_URL)
+        driver.get(BASE_URL)
         content = driver.page_source
         soup = bs4.BeautifulSoup(content, features="html.parser")
 
