@@ -10,7 +10,7 @@ import cowsay
 
 #TODO: Fix Cowsay to look nice in discord chat box
 #TODO: Retrieve daily question for all bot instances at once.
-DEBUG = True
+DEBUG = False
 
 class DailyLeetClient(commands.Bot):
     EST = pytz.timezone("US/Eastern")
